@@ -1,38 +1,49 @@
 package classes;
 //<<<<<<< Upstream, based on branch 'main' of https://github.com/AccelerateKID-Steven/JavaProject2.git
 //This Project is made by: Cocodadog, Potaioss, BlastedGlass07
-//Metric System Calculator/Converter - has item, converts measurements of it into metric or just convert
-//for now we just want to do one measurements at a time
+//Scheduler - Input time and what you'll need to do, and press button. 
+//Repeat as many times as necessary and the inputted stuff will sort by time. dd/mm/yy
 public class InitEntityValue
 {
 	//field variables
-	private String Unit;
-	private boolean UnitSys; //if UnitSys true, convert to metric. if UnitSys false, convert to imperial
-	private float Imperial, Metric;
+	private String Plans, Time, Date;
+	private int Hour, Minute, Day, Month, Year; //gonna combine all into Date, and use them to sort to-dos
 	
 	//default constructor
 	public InitEntityValue(){
-		Unit = "Celcius";
-		UnitSys = true;
-		Imperial = 32;
-		Metric = 0;
+		Plans = "Eat Dinner";
+		Time = "4:30";
+		Date = "8/10/2019";
 	}
-	public void IntiEntityValue(String Unit, boolean UnitSys, float Imperial, float Metric) {
-		this.Unit = Unit;
-		this.UnitSys = UnitSys;
-		this.Imperial = Imperial;
-		this.Metric = Metric;
+	public void IntiEntityValue(String Plans) {
+		this.Plans = Plans;
+		this.Time = Hour + " : " + Minute;
+		this.Date = Day + "/" + Month + "/" + Year;
 		
 	}
-	public String getUnit(){return Unit;}
-	public void setUnit(String Unit){this.Unit = Unit;}
+	public String toString()
+	{
+	      String myString;
+	      myString =  Time + " - " + Plans;
+	      
+	      return myString;
+	      
+	}
+	public String getPlans(){return Plans;}
+	public void setPlans(String Plans){this.Plans = Plans;}
 	
-	public boolean getUnitSys(){return UnitSys;}
-	public void setUnitSys(boolean UnitSys){this.UnitSys = UnitSys;}
+	public int getHour(){return Hour;}
+	public void setHour(int Hour){this.Hour = Hour;}
 	
-	public float getImperial(){return Imperial;}
-	public void setImperial(float Imperial){this.Imperial = Imperial;}
+	public int getMinute(){return Minute;}
+	public void setMinute(int Minute){this.Minute = Minute;}
 	
-	public float getMetric(){return Metric;}
-	public void setMetric(float Metric){this.Metric = Metric;}
+	public int getDay(){return Day;}
+	public void setDay(int Day){this.Day = Day;}
+	
+	public int getMonth(){return Month;}
+	public void setMonth(int Month){this.Month = Month;}
+	
+	public int getYear(){return Year;}
+	public void setYear(int Year){this.Year = Year;}
 }
