@@ -24,10 +24,22 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
+import javax.swing.JEditorPane;
+import javax.swing.JTable;
 
 public class Project2GUI extends JFrame implements ActionListener{
 
+	//field variables
 	private JFrame frame;
+	private JEditorPane inputPlan;
+	private JTable tableplanner;
+	private JButton btnAdd;
+	private JTextField txtHour;
+	private JTextField txtMinute;
+	private JTextField txtdd;
+	private JTextField txtmm;
+	private JTextField txtyear;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -72,6 +84,102 @@ public class Project2GUI extends JFrame implements ActionListener{
 		separator_1.setForeground(Color.WHITE);
 		separator_1.setBounds(10, 37, 586, 2);
 		frame.getContentPane().add(separator_1);
+		
+		//User inputs plans
+		inputPlan = new JEditorPane();
+		inputPlan.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		inputPlan.setBounds(10, 49, 586, 75);
+		frame.getContentPane().add(inputPlan);
+		
+		tableplanner = new JTable();
+		tableplanner.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		tableplanner.setBounds(10, 390, 586, 163);
+		frame.getContentPane().add(tableplanner);
+		
+		btnAdd = new JButton("Add");
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnAdd.setBounds(260, 357, 85, 21);
+		frame.getContentPane().add(btnAdd);
+		
+		JLabel lblTime = new JLabel("Time (12 Hour)");
+		lblTime.setForeground(Color.WHITE);
+		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTime.setBounds(10, 134, 131, 21);
+		frame.getContentPane().add(lblTime);
+		
+		txtHour = new JTextField();
+		txtHour.setHorizontalAlignment(SwingConstants.CENTER);
+		txtHour.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtHour.setBounds(20, 165, 35, 23);
+		frame.getContentPane().add(txtHour);
+		txtHour.setColumns(10);
+		
+		JLabel lbl1 = new JLabel(":");
+		lbl1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lbl1.setForeground(Color.WHITE);
+		lbl1.setBounds(65, 165, 6, 23);
+		frame.getContentPane().add(lbl1);
+		
+		txtMinute = new JTextField();
+		txtMinute.setHorizontalAlignment(SwingConstants.CENTER);
+		txtMinute.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtMinute.setColumns(10);
+		txtMinute.setBounds(81, 165, 35, 23);
+		frame.getContentPane().add(txtMinute);
+		
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setForeground(Color.WHITE);
+		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDate.setBounds(151, 134, 45, 20);
+		frame.getContentPane().add(lblDate);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(151, 153, 141, 2);
+		frame.getContentPane().add(separator);
+		
+		JLabel lbldd = new JLabel("Day #:");
+		lbldd.setForeground(Color.WHITE);
+		lbldd.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lbldd.setBounds(151, 165, 57, 22);
+		frame.getContentPane().add(lbldd);
+		
+		txtdd = new JTextField();
+		txtdd.setHorizontalAlignment(SwingConstants.CENTER);
+		txtdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtdd.setColumns(10);
+		txtdd.setBounds(207, 165, 35, 23);
+		frame.getContentPane().add(txtdd);
+		
+		JLabel lblmm = new JLabel("Month #:");
+		lblmm.setForeground(Color.WHITE);
+		lblmm.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblmm.setBounds(252, 165, 77, 22);
+		frame.getContentPane().add(lblmm);
+		
+		txtmm = new JTextField();
+		txtmm.setHorizontalAlignment(SwingConstants.CENTER);
+		txtmm.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtmm.setColumns(10);
+		txtmm.setBounds(328, 165, 35, 23);
+		frame.getContentPane().add(txtmm);
+		
+		JLabel lblyyyy = new JLabel("Year #:");
+		lblyyyy.setForeground(Color.WHITE);
+		lblyyyy.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblyyyy.setBounds(373, 166, 62, 22);
+		frame.getContentPane().add(lblyyyy);
+		
+		txtyear = new JTextField();
+		txtyear.setHorizontalAlignment(SwingConstants.CENTER);
+		txtyear.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtyear.setColumns(10);
+		txtyear.setBounds(434, 165, 35, 23);
+		frame.getContentPane().add(txtyear);
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setOrientation(SwingConstants.VERTICAL);
+		separator_2.setBounds(140, 134, 1, 75);
+		frame.getContentPane().add(separator_2);
 	}
 
 	@Override
@@ -81,3 +189,8 @@ public class Project2GUI extends JFrame implements ActionListener{
 				
 	}
 }
+
+
+
+
+
