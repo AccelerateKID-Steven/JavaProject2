@@ -7,6 +7,11 @@ import javax.swing.JOptionPane;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import classes.InitEntityValue;
+import classes.Student;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JSplitPane;
@@ -39,6 +44,12 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private JTextField txtdd;
 	private JTextField txtmm;
 	private JTextField txtyear;
+	private InitEntityValue plan;
+	private ArrayList<InitEntityValue> Planner = new ArrayList<InitEntityValue>();
+	private String[] columns;
+	private Object[][] data;
+	
+	private int hour, minute, day, month, year;
 	
 	/**
 	 * Launch the application.
@@ -100,6 +111,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAdd.setBounds(260, 357, 85, 21);
 		frame.getContentPane().add(btnAdd);
+		btnAdd.addActionListener(this);
 		
 		JLabel lblTime = new JLabel("Time (12 Hour)");
 		lblTime.setForeground(Color.WHITE);
@@ -180,12 +192,134 @@ public class Project2GUI extends JFrame implements ActionListener{
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		separator_2.setBounds(140, 134, 1, 75);
 		frame.getContentPane().add(separator_2);
+		
+		
+		
+		data = new Object[][] {
+			
+		};
+	}
+	
+	private boolean Validate() {
+		boolean bool = true;
+		hour = 0;
+		minute = 0;
+		day = 0;
+		month = 0;
+		year = 0;
+		if(inputPlan.getText().equals(""))
+		{
+			bool = false;
+			JOptionPane.showMessageDialog(null,"You must write something in the large box");
+		}
+		if(txtHour.getText().equals(""))
+		{
+			bool = false;
+			JOptionPane.showMessageDialog(null,"Hour is a required variable");
+		}
+		else {
+			try {
+				hour = Integer.parseInt(txtHour.getText());
+			}
+			catch(Exception e) {
+				bool = false;
+				JOptionPane.showMessageDialog(null,"Hour is a required variable");
+				}
+			}
+		if(txtMinute.getText().equals(""))
+		{
+			bool = false;
+			JOptionPane.showMessageDialog(null,"Minute is a required variable");
+		}
+		else {
+			try {
+				minute = Integer.parseInt(txtMinute.getText());
+			}
+			catch(Exception e) {
+				bool = false;
+				JOptionPane.showMessageDialog(null,"Minute is a required variable");
+				}
+			}
+		if(txtdd.getText().equals(""))
+		{
+			bool = false;
+			JOptionPane.showMessageDialog(null,"Day is a required variable");
+		}
+		else {
+			try {
+				day = Integer.parseInt(txtdd.getText());
+			}
+			catch(Exception e) {
+				bool = false;
+				JOptionPane.showMessageDialog(null,"Day is a required variable");
+				}
+			}
+		if(txtmm.getText().equals(""))
+		{
+			bool = false;
+			JOptionPane.showMessageDialog(null,"Month is a required variable");
+		}
+		else {
+			try {
+				month = Integer.parseInt(txtmm.getText());
+			}
+			catch(Exception e) {
+				bool = false;
+				JOptionPane.showMessageDialog(null,"Month is a required variable");
+				}
+			}
+		if(txtyear.getText().equals(""))
+		{
+			bool = false;
+			JOptionPane.showMessageDialog(null,"Year is a required variable");
+		}
+		else {
+			try {
+				year = Integer.parseInt(txtyear.getText());
+			}
+			catch(Exception e) {
+				bool = false;
+				JOptionPane.showMessageDialog(null,"Year is a required variable");
+				}
+			}
+		return bool;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
 		Object source = e.getSource();
+		if(source == btnAdd)
+		{
+			//if controls are valid, run the code
+			if(Validate())
+			{
+				String strPlan = new String();
+				String strTime = new String();
+				strPlan = inputPlan.getText();
+				strTime = hour + ":" + minute;
+				
+				plan = new InitEntityValue(strPlan, strTime);
+				System.out.println(Planner.toString());
+				
+				Planner.add(plan);
+				
+				data = new Object[Planner.size()][4];
+				
+				//take our information and put it in our 2D array
+				for(int i = 0; i < Planner.size(); i++)
+				{
+					data[i][0] = Planner.get(i).getPlans();
+					data[i][1] = Planner.get(i).getTime();
+					data[i][2] = Planner.get(i).getDay();
+					data[i][3] = Planner.get(i).getMonth();
+					data[i][4] = Planner.get(i).getYear();
+				}
+				tableplanner.setModel(new DefaultTableModel(data,4));
+			}
+			
+		}
 				
 	}
 }

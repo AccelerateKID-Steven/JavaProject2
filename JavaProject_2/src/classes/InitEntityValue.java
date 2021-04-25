@@ -9,17 +9,19 @@ public class InitEntityValue
 	private String Plans, Time, Date;
 	private int Hour, Minute, Day, Month, Year; //gonna combine all into Date, and use them to sort to-dos
 	
-	//default constructor
 	public InitEntityValue(){
 		Plans = "Eat Dinner";
-		Time = "4:30";
-		Date = "8/10/2019";
+		Time = "5:30";
+		Day = 5;
+		Month = 5;
+		Year = 5;
 	}
-	public void IntiEntityValue(String Plans) {
+	public void IntiEntityValue(String Plans, String Time, int Day, int Month, int Year) {
 		this.Plans = Plans;
-		this.Time = Hour + " : " + Minute;
-		this.Date = Day + "/" + Month + "/" + Year;
-		
+		this.Time = Time;
+		this.Day = Day;
+		this.Month = Month;
+		this.Year = Year;
 	}
 	public String toString()
 	{
@@ -32,11 +34,8 @@ public class InitEntityValue
 	public String getPlans(){return Plans;}
 	public void setPlans(String Plans){this.Plans = Plans;}
 	
-	public int getHour(){return Hour;}
-	public void setHour(int Hour){this.Hour = Hour;}
-	
-	public int getMinute(){return Minute;}
-	public void setMinute(int Minute){this.Minute = Minute;}
+	public String getTime(){return Time;}
+	public void setTime(String Time){this.Time = Time;}
 	
 	public int getDay(){return Day;}
 	public void setDay(int Day){this.Day = Day;}
