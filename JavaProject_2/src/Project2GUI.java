@@ -10,7 +10,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import classes.InitEntityValue;
-import classes.Student;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -48,7 +47,8 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private ArrayList<InitEntityValue> Planner = new ArrayList<InitEntityValue>();
 	private String[] columns;
 	private Object[][] data;
-	
+	String strPlan = new String("");
+	String strTime = new String("");
 	private int hour, minute, day, month, year;
 	
 	/**
@@ -295,8 +295,6 @@ public class Project2GUI extends JFrame implements ActionListener{
 			//if controls are valid, run the code
 			if(Validate())
 			{
-				String strPlan = new String();
-				String strTime = new String();
 				strPlan = inputPlan.getText();
 				strTime = hour + ":" + minute;
 				

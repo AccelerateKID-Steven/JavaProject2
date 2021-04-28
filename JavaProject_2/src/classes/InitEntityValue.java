@@ -9,7 +9,7 @@ public class InitEntityValue
 	private String Plans, Time, Date;
 	private int Hour, Minute, Day, Month, Year; //gonna combine all into Date, and use them to sort to-dos
 	
-	public InitEntityValue(){
+	public InitEntityValue(String strPlan, String strTime){
 		Plans = "Eat Dinner";
 		Time = "5:30";
 		Day = 5;
