@@ -193,7 +193,10 @@ public class Project2GUI extends JFrame implements ActionListener{
 		separator_2.setBounds(140, 134, 1, 75);
 		frame.getContentPane().add(separator_2);
 		
-		
+		columns = new String[] {
+				//"Day", "Month", "Year", 
+				"Plan", "Due Time", "Due Date"
+			};
 		
 		data = new Object[][] {
 			
@@ -303,18 +306,19 @@ public class Project2GUI extends JFrame implements ActionListener{
 				
 				Planner.add(plan);
 				
-				data = new Object[Planner.size()][4];
+				data = new Object[Planner.size()][columns.length];
 				
 				//take our information and put it in our 2D array
 				for(int i = 0; i < Planner.size(); i++)
 				{
 					data[i][0] = Planner.get(i).getPlans();
 					data[i][1] = Planner.get(i).getTime();
-					data[i][2] = Planner.get(i).getDay();
+					data[i][2] = Planner.get(i).getDate();
+					/*data[i][2] = Planner.get(i).getDay();
 					data[i][3] = Planner.get(i).getMonth();
-					data[i][4] = Planner.get(i).getYear();
+					data[i][4] = Planner.get(i).getYear();*/
 				}
-				tableplanner.setModel(new DefaultTableModel(data,4));
+				tableplanner.setModel(new DefaultTableModel(data,columns));
 			}
 			
 		}

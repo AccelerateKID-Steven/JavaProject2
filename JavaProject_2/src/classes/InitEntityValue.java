@@ -12,13 +12,12 @@ public class InitEntityValue
 	public InitEntityValue(String strPlan, String strTime){
 		Plans = "Eat Dinner";
 		Time = "5:30";
-		Day = 5;
-		Month = 5;
-		Year = 5;
+		Date = "5/5/2005"; //Day + "/" + Month + "/" + Year
 	}
-	public void IntiEntityValue(String Plans, String Time, int Day, int Month, int Year) {
+	public void IntiEntityValue(String Plans, String Time, String Date, int Day, int Month, int Year) {
 		this.Plans = Plans;
 		this.Time = Time;
+		this.Date = Date;
 		this.Day = Day;
 		this.Month = Month;
 		this.Year = Year;
@@ -36,6 +35,9 @@ public class InitEntityValue
 	
 	public String getTime(){return Time;}
 	public void setTime(String Time){this.Time = Time;}
+	
+	public String getDate(){return Date;}
+	public void setDate(String Date){this.Date = Date;}
 	
 	public int getDay(){return Day;}
 	public void setDay(int Day){this.Day = Day;}
