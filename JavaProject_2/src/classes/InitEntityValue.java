@@ -3,21 +3,29 @@ package classes;
 //This Project is made by: Cocodadog, Potaioss, BlastedGlass07
 //Scheduler - Input time and what you'll need to do, and press button. 
 //Repeat as many times as necessary and the inputted stuff will sort by time. dd/mm/yy
+
+import java.util.ArrayList;
+
 public class InitEntityValue
 {
 	//field variables
 	private String Plans, Time, Date;
 	private int Hour, Minute, Day, Month, Year; //gonna combine all into Date, and use them to sort to-dos
 	
-	public InitEntityValue(String strPlan, String strTime){
+	public InitEntityValue(){
 		Plans = "Eat Dinner";
 		Time = "5:30";
 		Date = "5/5/2005"; //Day + "/" + Month + "/" + Year
+		Day = 5;
+		Month = 5;
+		Year = 2005;
 	}
-	public void IntiEntityValue(String Plans, String Time, String Date, int Day, int Month, int Year) {
+	public InitEntityValue(String Plans, String Time, String Date, 
+								int Day, int Month, int Year)
+	{
 		this.Plans = Plans;
 		this.Time = Time;
-		this.Date = Date;
+		this.Date = Day + "/" + Month + "/" + Year;
 		this.Day = Day;
 		this.Month = Month;
 		this.Year = Year;
@@ -25,7 +33,8 @@ public class InitEntityValue
 	public String toString()
 	{
 	      String myString;
-	      myString =  Time + " - " + Plans;
+	      myString =  Time + " - " + Plans +
+	    		  	"\n" + Day + "/" + Month + "/" + Year;
 	      
 	      return myString;
 	      

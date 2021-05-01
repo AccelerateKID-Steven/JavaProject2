@@ -47,8 +47,11 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private ArrayList<InitEntityValue> Planner = new ArrayList<InitEntityValue>();
 	private String[] columns;
 	private Object[][] data;
+	private ArrayList<String> sortdata = new ArrayList<String>();
+	private int j = 0;
 	String strPlan = new String("");
 	String strTime = new String("");
+	String date = new String("");
 	private int hour, minute, day, month, year;
 	
 	/**
@@ -193,9 +196,10 @@ public class Project2GUI extends JFrame implements ActionListener{
 		separator_2.setBounds(140, 134, 1, 75);
 		frame.getContentPane().add(separator_2);
 		
-		columns = new String[] {
-				//"Day", "Month", "Year", 
-				"Plan", "Due Time", "Due Date"
+		//How many columns are in the table
+		columns = new String[] { 
+				"Plan", "Due Time", "Due Date",
+				//"Day", "Month", "Year"
 			};
 		
 		data = new Object[][] {
@@ -223,6 +227,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 		else {
 			try {
 				hour = Integer.parseInt(txtHour.getText());
+				if(hour < 0 || hour > 12) {
+					
+				}
 			}
 			catch(Exception e) {
 				bool = false;
@@ -237,6 +244,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 		else {
 			try {
 				minute = Integer.parseInt(txtMinute.getText());
+				if(minute < 0 || minute > 60) {
+					
+				}
 			}
 			catch(Exception e) {
 				bool = false;
@@ -251,6 +261,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 		else {
 			try {
 				day = Integer.parseInt(txtdd.getText());
+				if(day < 0 || day > 31) {
+					
+				}
 			}
 			catch(Exception e) {
 				bool = false;
@@ -265,6 +278,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 		else {
 			try {
 				month = Integer.parseInt(txtmm.getText());
+				if(month < 0 || month > 12) {
+					
+				}
 			}
 			catch(Exception e) {
 				bool = false;
@@ -279,6 +295,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 		else {
 			try {
 				year = Integer.parseInt(txtyear.getText());
+				if(year < 0) {
+					
+				}
 			}
 			catch(Exception e) {
 				bool = false;
@@ -298,10 +317,12 @@ public class Project2GUI extends JFrame implements ActionListener{
 			//if controls are valid, run the code
 			if(Validate())
 			{
-				strPlan = inputPlan.getText();
-				strTime = hour + ":" + minute;
+				String strPlan = inputPlan.getText();
+				String strTime = hour + ":" + minute;
+				String date = day + "/" + month + "/" + year;
 				
-				plan = new InitEntityValue(strPlan, strTime);
+				
+				plan = new InitEntityValue((String) strPlan, strTime, date, (int) day, month, year);
 				System.out.println(Planner.toString());
 				
 				Planner.add(plan);
@@ -314,11 +335,17 @@ public class Project2GUI extends JFrame implements ActionListener{
 					data[i][0] = Planner.get(i).getPlans();
 					data[i][1] = Planner.get(i).getTime();
 					data[i][2] = Planner.get(i).getDate();
-					/*data[i][2] = Planner.get(i).getDay();
-					data[i][3] = Planner.get(i).getMonth();
-					data[i][4] = Planner.get(i).getYear();*/
+					/*data[i][3] = Planner.get(i).getDay();
+					data[i][4] = Planner.get(i).getMonth();
+					data[i][5] = Planner.get(i).getYear();*/
 				}
 				tableplanner.setModel(new DefaultTableModel(data,columns));
+				
+				//sort multiple "Add" submissions
+				
+				String s = date;
+				sortdata.add(s);
+				System.out.println(sortdata);
 			}
 			
 		}
