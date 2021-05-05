@@ -38,16 +38,18 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private JEditorPane inputPlan;
 	private JTable tableplanner;
 	private JButton btnAdd;
+	//our inputs of due date and time
 	private JTextField txtHour;
 	private JTextField txtMinute;
 	private JTextField txtdd;
 	private JTextField txtmm;
 	private JTextField txtyear;
+	
 	private InitEntityValue plan;
 	private ArrayList<InitEntityValue> Planner = new ArrayList<InitEntityValue>();
 	private String[] columns;
 	private Object[][] data;
-	private ArrayList<String> sortdata = new ArrayList<String>();
+	private ArrayList<String> sortdata = new ArrayList<String>(); //irrelevant for now ig?
 	private int j = 0;
 	String strPlan = new String("");
 	String strTime = new String("");
@@ -214,9 +216,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 		day = 0;
 		month = 0;
 		year = 0;
-		if(inputPlan.getText().equals(""))
+		if(inputPlan.getText().equals("")) //if empty or no reply
 		{
-			bool = false;
+			bool = false; //no initiation
 			JOptionPane.showMessageDialog(null,"You must write something in the large box");
 		}
 		if(txtHour.getText().equals(""))
@@ -225,7 +227,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(null,"Hour is a required variable");
 		}
 		else {
-			try {
+			try { //same thing
 				hour = Integer.parseInt(txtHour.getText());
 				if(hour < 0 || hour > 12) {
 					
@@ -310,18 +312,19 @@ public class Project2GUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		//press the button
 		Object source = e.getSource();
 		if(source == btnAdd)
 		{
 			//if controls are valid, run the code
 			if(Validate())
 			{
+				//strTime is like 5:30, strPlan is whatcha gonna do, date is like due date
 				String strPlan = inputPlan.getText();
 				String strTime = hour + ":" + minute;
 				String date = day + "/" + month + "/" + year;
 				
-				
+				//send information to InitEntityValue class to create an InitEntityValue with constructor
 				plan = new InitEntityValue((String) strPlan, strTime, date, (int) day, month, year);
 				System.out.println(Planner.toString());
 				
@@ -330,6 +333,10 @@ public class Project2GUI extends JFrame implements ActionListener{
 				data = new Object[Planner.size()][columns.length];
 				
 				//take our information and put it in our 2D array
+				
+				/*TODO: every time we get information, we will loop it that many times the
+				//next time we add another submission (after sorting)
+				ex: 2 submissions -> runs two times*/
 				for(int i = 0; i < Planner.size(); i++)
 				{
 					data[i][0] = Planner.get(i).getPlans();
@@ -339,10 +346,11 @@ public class Project2GUI extends JFrame implements ActionListener{
 					data[i][4] = Planner.get(i).getMonth();
 					data[i][5] = Planner.get(i).getYear();*/
 				}
+				//put into table
 				tableplanner.setModel(new DefaultTableModel(data,columns));
 				
-				//sort multiple "Add" submissions
-				
+				//TODO:sort multiple "Add" submissions
+				//yeah i have no idea how to do this, help - we need to store this info somewhere
 				String s = date;
 				sortdata.add(s);
 				System.out.println(sortdata);
