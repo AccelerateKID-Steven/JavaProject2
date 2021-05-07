@@ -49,7 +49,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private ArrayList<InitEntityValue> Planner = new ArrayList<InitEntityValue>();
 	private String[] columns;
 	private Object[][] data;
-	private int j = 0;
+	private ArrayList<String> infostore = new ArrayList<String>();
 	private int addpressnumber = 0;
 	String strPlan = new String("");
 	String strTime = new String("");
@@ -321,7 +321,8 @@ public class Project2GUI extends JFrame implements ActionListener{
 			{
 				//strTime is like 5:30, strPlan is whatcha gonna do, date is like due date
 				String strPlan = inputPlan.getText();
-				String strTime = hour + ":" + minute;
+				String s = String.format("%02d", minute);
+				String strTime = hour + ":" + s;
 				String date = day + "/" + month + "/" + year;
 				
 				//send information to InitEntityValue class to create an InitEntityValue with constructor
@@ -352,28 +353,30 @@ public class Project2GUI extends JFrame implements ActionListener{
 				//TODO:sort multiple "Add" submissions
 				//yeah i have no idea how to do this, help - we need to store this info somewhere
 				//oldest to newest
-				for(int x = 0; x < addpressnumber; x++)
-				{
-
-				//int[][] multi = new int[x][plan.length]; //irrelevant for now ig?
-				//multi[x]
-					
-				//make new array to store information (testing for now)
+				//put all into one string
 				String str1 = Integer.toString(hour);
 				String str2 = Integer.toString(minute);
 				String str3 = Integer.toString(day);
 				String str4 = Integer.toString(month);
 				String str5 = Integer.toString(year);
-				String[] variablex = new String[] { 
-						strPlan, str1, str2, str3, str4, str5
-					};
-				}
+				String variablex = new String(str1 + "-" + str2 + "-" + str3 + "-" + 
+				str4 + "-" + str5 + "/" + strPlan);
+				
+				infostore.add(variablex);
+				System.out.println(infostore);
+				
 				
 			} 
+			//split parts of the infostore variables so we can start sorting by number, look in Console
+			for(int x = 0; x < infostore.size(); x++)
+			{
+				
 			
+			}
 		} 
 				
 	}
+	
 }
 
 
