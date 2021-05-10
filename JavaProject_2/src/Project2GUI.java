@@ -55,6 +55,12 @@ public class Project2GUI extends JFrame implements ActionListener{
 	String strTime = new String("");
 	String date = new String("");
 	private int hour, minute, day, month, year;
+	
+	
+	private String timetemp[] = new String[100], timeminute[] = new String[100], timehour[] = new String[100], 
+			dateday[] = new String[100], datemonth[] = new String[100], dateyear[] = new String[100];
+	private int timeminuteint[] = new int[100], timehourint[] = new int[100], datedayint[] = new int[100], 
+			datemonthint[] = new int[100], dateyearint[] = new int[100];
 	/**
 	 * Launch the application.
 	 */
@@ -360,19 +366,69 @@ public class Project2GUI extends JFrame implements ActionListener{
 				String str4 = Integer.toString(month);
 				String str5 = Integer.toString(year);
 				String variablex = new String(str1 + "-" + str2 + "-" + str3 + "-" + 
-				str4 + "-" + str5 + "/" + strPlan);
+				str4 + "-" + str5 + "-" + strPlan);
 				
 				infostore.add(variablex);
 				System.out.println(infostore);
 				
-				
+				for(int x = 0; x < infostore.size(); x++)
+				{
+					timetemp[x] = infostore.get(x);
+					//timeminute = timehour;
+					
+					String[] parts = timetemp[x].split("-");
+					timehour[x] = parts[0];
+					timeminute[x] = parts[1];
+					dateday[x] = parts[2];
+					datemonth[x] = parts[3];
+					dateyear[x] = parts[4];
+					
+					timehourint[x] = Integer.parseInt(timehour[x]);
+					timeminuteint[x] = Integer.parseInt(timeminute[x]);
+					datedayint[x] = Integer.parseInt(dateday[x]);
+					datemonthint[x] = Integer.parseInt(datemonth[x]);
+					dateyearint[x] = Integer.parseInt(dateyear[x]);
+					
+					//timehour = timehour.substring(0,timehour.indexOf("-"));
+					//timeminute = timeminute.substring(timeminute.indexOf("-") + 1, timeminute.length());
+					System.out.println(timehourint[x] + ":" + timeminuteint[x] + ":" + datedayint[x]
+							+ ":" + datemonthint[x] + ":" + dateyearint[x]);
+				}	
+				/*
+				 	//TODO:SORTER
+				 
+					int temp = 0;
+					int size = infostore.size();
+		            
+		            /*this controls how many times we need to
+		            repeat the sort (for every item in the array)
+		            *
+		            for(int i = 0; i < infostore.size(); i++) 
+		            {
+		            /* This sorts the array once starting at the first index
+		            *
+		               for(int j = 1; j < (infostore.size() - i); j++)
+		               {
+		                  //i represents the current value in the current index, starting from 0
+		                  if(timehourint[i] > timehourint[i+1]){
+		                     //if the first letter in the current student's name has a greater
+		                     //decimal than the next...
+		                     temp = timehourint[j-1];
+		                     timehourint[j-1] = timehourint[j];
+		                     timehourint[j] = temp;
+		                     
+		                  }
+		               }
+		            }
+		            String formattedArray = "thing\n";
+		            for(int tempint : timehourint) //forEach loop
+		            {
+		               formattedArray += tempint;
+		            }
+		            System.out.println(formattedArray);
+				*/
 			} 
-			//split parts of the infostore variables so we can start sorting by number, look in Console
-			for(int x = 0; x < infostore.size(); x++)
-			{
-				
 			
-			}
 		} 
 				
 	}
