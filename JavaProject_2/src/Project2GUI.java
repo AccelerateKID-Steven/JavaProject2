@@ -396,39 +396,38 @@ public class Project2GUI extends JFrame implements ActionListener{
 					System.out.println(timehourint[x] + ":" + timeminuteint[x] + ":" + datedayint[x]
 							+ ":" + datemonthint[x] + ":" + dateyearint[x]);
 				}	
-				/*
+				
 				 	//TODO:SORTER
 				 
-					int temp = 0;
+					String temp = "";
 					int size = infostore.size();
+		            if(size > 1) {
+			            /*this controls how many times we need to
+			            repeat the sort (for every item in the array)
+			            */
+			            for(int i = 0; i < infostore.size(); i++) 
+			            {
+			            /* This sorts the array once starting at the first index
+			            */
+			               for(int j = 1; j < (infostore.size() - i); j++)
+			               {
+			                  //i represents the current value in the current index, starting from 0
+			                  if(dateyearint[i] > dateyearint[i+1]){
+			                     temp = timetemp[j-1];
+			                     timetemp[j-1] = timetemp[j];
+			                     timetemp[j] = temp;
+			                     
+			                  }
+			               }
+			            }
+			            String formattedArray = "thing\n";
+			            for(String tempint : timetemp) //forEach loop
+			            {
+			               formattedArray += tempint + " - ";
+			            }
+			            System.out.println(formattedArray);
+		           }
 		            
-		            /*this controls how many times we need to
-		            repeat the sort (for every item in the array)
-		            *
-		            for(int i = 0; i < infostore.size(); i++) 
-		            {
-		            /* This sorts the array once starting at the first index
-		            *
-		               for(int j = 1; j < (infostore.size() - i); j++)
-		               {
-		                  //i represents the current value in the current index, starting from 0
-		                  if(timehourint[i] > timehourint[i+1]){
-		                     //if the first letter in the current student's name has a greater
-		                     //decimal than the next...
-		                     temp = timehourint[j-1];
-		                     timehourint[j-1] = timehourint[j];
-		                     timehourint[j] = temp;
-		                     
-		                  }
-		               }
-		            }
-		            String formattedArray = "thing\n";
-		            for(int tempint : timehourint) //forEach loop
-		            {
-		               formattedArray += tempint;
-		            }
-		            System.out.println(formattedArray);
-				*/
 			} 
 			
 		} 
