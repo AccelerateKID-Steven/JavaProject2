@@ -116,6 +116,8 @@ public class Project2GUI extends JFrame implements ActionListener{
 		tableplanner.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		tableplanner.setBounds(10, 390, 586, 163);
 		frame.getContentPane().add(tableplanner);
+		//line below sets editing to false
+		tableplanner.setEnabled(false);
 		
 		btnAdd = new JButton("Add");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -291,7 +293,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 			}
 			catch(Exception e) {
 				bool = false;
-				JOptionPane.showMessageDialog(null,"Month is a required variable");
+				JOptionPane.showMessageDialog(null,"Month must be an integer between 1-12");
 				}
 			}
 		if(txtyear.getText().equals(""))
@@ -308,7 +310,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 			}
 			catch(Exception e) {
 				bool = false;
-				JOptionPane.showMessageDialog(null,"Year is a required variable");
+				JOptionPane.showMessageDialog(null,"Year must be a integer greater than 0");
 				}
 			}
 		return bool;
