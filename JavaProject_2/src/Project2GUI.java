@@ -371,7 +371,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 				str4 + "-" + str5 + "-" + strPlan);
 				
 				infostore.add(variablex);
-				System.out.println(infostore);
+				//System.out.println(infostore);
 				
 				for(int x = 0; x < infostore.size(); x++)
 				{
@@ -393,15 +393,15 @@ public class Project2GUI extends JFrame implements ActionListener{
 					
 					//timehour = timehour.substring(0,timehour.indexOf("-"));
 					//timeminute = timeminute.substring(timeminute.indexOf("-") + 1, timeminute.length());
-					System.out.println(timehourint[x] + ":" + timeminuteint[x] + ":" + datedayint[x]
-							+ ":" + datemonthint[x] + ":" + dateyearint[x]);
+					//System.out.println(timehourint[x] + ":" + timeminuteint[x] + ":" + datedayint[x]
+					//		+ ":" + datemonthint[x] + ":" + dateyearint[x]);
 				}	
 				
 				 	//TODO:SORTER
 				 
 					String temp = "";
-					int size = infostore.size();
-		            if(size > 1) {
+					int temp1, temp2, temp3 = 0;
+		            if(infostore.size() > 1) {
 			            /*this controls how many times we need to
 			            repeat the sort (for every item in the array)
 			            */
@@ -411,30 +411,71 @@ public class Project2GUI extends JFrame implements ActionListener{
 			            */
 			               for(int j = 1; j < (infostore.size() - i); j++)
 			               {
-			                  //i represents the current value in the current index, starting from 0
-			                  if(dateyearint[i] > dateyearint[i+1]){
-			                     temp = timetemp[j-1];
-			                     timetemp[j-1] = timetemp[j];
-			                     timetemp[j] = temp;
+			            	   //System.out.println(j);
+			                   //i represents the current value in the current index, starting from 0
+			            	   //sorts by year
+			            	   if(dateyearint[j - 1] > dateyearint[j]){
+			            		   temp = infostore.get(j);
+			            		   infostore.set(j, infostore.get(j - 1));
+			            		   infostore.set(j - 1, temp);
 			                     
-			                  }
+			            		   temp1 = dateyearint[j-1];
+			            		   dateyearint[j-1] = dateyearint[j];
+			            		   dateyearint[j] = temp1;
+			                   }
 			               }
+			               for(int j = 1; j < (infostore.size() - i); j++)
+			               {
+			            	  //System.out.println(j);
+			                  //i represents the current value in the current index, starting from 0
+			            	   if(datemonthint[j - 1] > datemonthint[j]){
+			            		   temp = infostore.get(j);
+			            		   infostore.set(j, infostore.get(j - 1));
+			            		   infostore.set(j - 1, temp);
+				                     
+			            		   temp1 = dateyearint[j-1];
+			            		   dateyearint[j-1] = dateyearint[j];
+			            		   dateyearint[j] = temp1;
+			            		   temp2 = datemonthint[j-1];
+			            		   datemonthint[j-1] = datemonthint[j];
+			            		   datemonthint[j] = temp2;  
+				               }
+			               }
+			               for(int j = 1; j < (infostore.size() - i); j++)
+				           {
+			            	   	if(datedayint[j - 1] > datedayint[j]){
+			            		   temp = infostore.get(j);
+					               infostore.set(j, infostore.get(j - 1));
+					               infostore.set(j - 1, temp);
+					                     
+					               temp1 = dateyearint[j-1];
+					               dateyearint[j-1] = dateyearint[j];
+					               dateyearint[j] = temp1;
+					               temp2 = datemonthint[j-1];
+					               datemonthint[j-1] = datemonthint[j];
+					               datemonthint[j] = temp2;
+					               temp3 = datedayint[j-1];
+					               datedayint[j-1] = datedayint[j];
+					               datedayint[j] = temp3;
+					            }
+				           	} 
 			            }
-			            String formattedArray = "thing\n";
-			            for(String tempint : timetemp) //forEach loop
-			            {
-			               formattedArray += tempint + " - ";
-			            }
-			            System.out.println(formattedArray);
-		           }
-		            
-			} 
+			            String formattedArray = "test\n";
+					    for(String tempint : infostore) //forEach loop
+					    {
+					    	formattedArray += tempint + "\n";
+					    }
+					    System.out.println(formattedArray);
+		            	}
+			        
+					}
 			
-		} 
-				
-	}
-	
+				}
+		            
+			}
+			
 }
+
 
 
 
