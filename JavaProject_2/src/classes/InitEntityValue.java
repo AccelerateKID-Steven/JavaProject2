@@ -16,21 +16,22 @@ public class InitEntityValue
 		Plans = "Eat Dinner";
 		Time = "5:30";
 		Date = "5/5/2005"; //Day + "/" + Month + "/" + Year
-		Day = 5;
+		/*Day = 5;
 		Month = 5;
-		Year = 2005;
+		Year = 2005;*/
 	}
-	public InitEntityValue(String Plans, String Time, String Date, 
-								int Day, int Month, int Year)
+	public InitEntityValue(String Plans, String Time, String Date
+								//,int Day, int Month, int Year
+								)
 	{
 		this.Plans = Plans;
 		this.Time = Time;
-		this.Date = Day + "/" + Month + "/" + Year;
-		this.Day = Day;
-		this.Month = Month;
-		this.Year = Year;
+		this.Date =  Date;
+		//this.Day = Day;
+		//this.Month = Month;
+		//this.Year = Year;
 	}
-	public String toString()
+	/*public String toString()
 	{
 	      String myString;
 	      myString =  Time + " - " + Plans +
@@ -38,7 +39,7 @@ public class InitEntityValue
 	      
 	      return myString;
 	      
-	}
+	}*/
 	public String getPlans(){return Plans;}
 	public void setPlans(String Plans){this.Plans = Plans;}
 	
@@ -48,12 +49,12 @@ public class InitEntityValue
 	public String getDate(){return Date;}
 	public void setDate(String Date){this.Date = Date;}
 	
-	public int getDay(){return Day;}
+	/*public int getDay(){return Day;}
 	public void setDay(int Day){this.Day = Day;}
 	
 	public int getMonth(){return Month;}
 	public void setMonth(int Month){this.Month = Month;}
 	
 	public int getYear(){return Year;}
-	public void setYear(int Year){this.Year = Year;}
+	public void setYear(int Year){this.Year = Year;}*/
 }

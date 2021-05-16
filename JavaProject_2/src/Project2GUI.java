@@ -57,7 +57,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private int hour, minute, day, month, year;
 	
 	
-	private String timetemp[] = new String[100], timeString[] = new String[100], timeminute[] = new String[100], timehour[] = new String[100], 
+	private String timetemp[] = new String[100], planString[] = new String[100], timeminute[] = new String[100], timehour[] = new String[100], 
 			dateday[] = new String[100], datemonth[] = new String[100], dateyear[] = new String[100];
 	private int timeminuteint[] = new int[100], timehourint[] = new int[100], datedayint[] = new int[100], 
 			datemonthint[] = new int[100], dateyearint[] = new int[100];
@@ -327,36 +327,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 			//if controls are valid, run the code
 			if(Validate())
 			{
-				//strTime is like 5:30, strPlan is whatcha gonna do, date is like due date
-				String strPlan = inputPlan.getText();
-				String s = String.format("%02d", minute);
-				String strTime = hour + ":" + s;
-				String date = day + "/" + month + "/" + year;
 				
-				//send information to InitEntityValue class to create an InitEntityValue with constructor
-				plan = new InitEntityValue((String) strPlan, strTime, date, (int) day, month, year);
-				//System.out.println(Planner.toString());
-				
-				Planner.add(plan);
-				
-				data = new Object[Planner.size()][columns.length];
-				
-				//take our information and put it in our 2D array
-				
-				/*TODO: every time we get information, we will loop it that many times the
-				//next time we add another submission (after sorting)
-				ex: 2 submissions -> runs two times*/
-				for(int i = 0; i < Planner.size(); i++)
-				{
-					data[i][0] = Planner.get(i).getPlans();
-					data[i][1] = Planner.get(i).getTime();
-					data[i][2] = Planner.get(i).getDate();
-					/*data[i][3] = Planner.get(i).getDay();
-					data[i][4] = Planner.get(i).getMonth();
-					data[i][5] = Planner.get(i).getYear();*/
-				}
-				//put into table
-				tableplanner.setModel(new DefaultTableModel(data,columns));
 				
 				//TODO:sort multiple "Add" submissions
 				//yeah i have no idea how to do this, help - we need to store this info somewhere
@@ -368,40 +339,40 @@ public class Project2GUI extends JFrame implements ActionListener{
 				String str4 = Integer.toString(month);
 				String str5 = Integer.toString(year);
 				String variablex = new String(str1 + "-" + str2 + "-" + str3 + "-" + 
-				str4 + "-" + str5 + "-" + strPlan);
+				str4 + "-" + str5 + "-" + inputPlan.getText());
 				
 				infostore.add(variablex);
-				//System.out.println(infostore);
-				
-				for(int x = 0; x < infostore.size(); x++)
-				{
-					timetemp[x] = infostore.get(x);
-					
-					//split an array index into their own useful forms - does this for ALL indexes
-					String[] parts = timetemp[x].split("-");
-					timehour[x] = parts[0];
-					timeminute[x] = parts[1];
-					dateday[x] = parts[2];
-					datemonth[x] = parts[3];
-					dateyear[x] = parts[4];
-					//turn them into integers in order to bubble sort
-					timehourint[x] = Integer.parseInt(timehour[x]);
-					timeminuteint[x] = Integer.parseInt(timeminute[x]);
-					datedayint[x] = Integer.parseInt(dateday[x]);
-					datemonthint[x] = Integer.parseInt(datemonth[x]);
-					dateyearint[x] = Integer.parseInt(dateyear[x]);
-					
-					//timehour = timehour.substring(0,timehour.indexOf("-"));
-					//timeminute = timeminute.substring(timeminute.indexOf("-") + 1, timeminute.length());
-					//System.out.println(timehourint[x] + ":" + timeminuteint[x] + ":" + datedayint[x]
-					//		+ ":" + datemonthint[x] + ":" + dateyearint[x]);
-				}	
+				System.out.println(infostore);
 				
 				//Bubble sorts
 				 
 				String temp = "";
 				int temp1, temp2, temp3, temp4, temp5 = 0;
 		        if(infostore.size() > 1) {
+		        	
+		        	for(int x = 0; x < infostore.size(); x++)
+					{
+						timetemp[x] = infostore.get(x);
+						
+						//split an array index into their own useful forms - does this for ALL indexes
+						String[] parts = timetemp[x].split("-");
+						timehour[x] = parts[0];
+						timeminute[x] = parts[1];
+						dateday[x] = parts[2];
+						datemonth[x] = parts[3];
+						dateyear[x] = parts[4];
+						//turn them into integers in order to bubble sort
+						timehourint[x] = Integer.parseInt(timehour[x]);
+						timeminuteint[x] = Integer.parseInt(timeminute[x]);
+						datedayint[x] = Integer.parseInt(dateday[x]);
+						datemonthint[x] = Integer.parseInt(datemonth[x]);
+						dateyearint[x] = Integer.parseInt(dateyear[x]);
+						
+						//timehour = timehour.substring(0,timehour.indexOf("-"));
+						//timeminute = timeminute.substring(timeminute.indexOf("-") + 1, timeminute.length());
+						//System.out.println(timehourint[x] + ":" + timeminuteint[x] + ":" + datedayint[x]
+						//		+ ":" + datemonthint[x] + ":" + dateyearint[x]);
+					}	
 			        /*this controls how many times we need to
 			        repeat the sort (for every item in the array)
 			        NOTE: extremely sensitive to order in which you for loop
@@ -546,9 +517,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 					    	formattedArray += tempint + "\n";
 					    }
 					    //System.out.println(formattedArray);
-					    System.out.println(infostore);
+					    //System.out.println(infostore);
 		            	}
-		        		/*
+		        		
 				        for(int x = 0; x < infostore.size(); x++)
 						{
 							timetemp[x] = infostore.get(x);
@@ -560,7 +531,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 							dateday[x] = parts[2];
 							datemonth[x] = parts[3];
 							dateyear[x] = parts[4];
-							timeString[x] = parts[5];
+							planString[x] = parts[5];
 							//turn them into integers
 							timehourint[x] = Integer.parseInt(timehour[x]);
 							timeminuteint[x] = Integer.parseInt(timeminute[x]);
@@ -568,12 +539,12 @@ public class Project2GUI extends JFrame implements ActionListener{
 							datemonthint[x] = Integer.parseInt(datemonth[x]);
 							dateyearint[x] = Integer.parseInt(dateyear[x]);
 							
-							String strPlan = inputPlan.getText();
-							String s = String.format("%02d", minute);
-							String strTime = hour + ":" + s;
-							String date = day + "/" + month + "/" + year;
+							String strPlan = planString[x].toString();
+							String s = String.format("%02d", timeminuteint[x]);
+							String strTime = timehourint[x] + ":" + s;
+							String date = datedayint[x] + "/" + datemonthint[x] + "/" + dateyearint[x];
 							
-							plan = new InitEntityValue((String) strPlan, strTime, date, (int) day, month, year);
+							plan = new InitEntityValue((String) strPlan, strTime, date); //sends into class
 							
 							Planner.add(plan);
 							
@@ -584,13 +555,19 @@ public class Project2GUI extends JFrame implements ActionListener{
 								data[i][1] = Planner.get(i).getTime();
 								data[i][2] = Planner.get(i).getDate();
 							}
-							tableplanner.setModel(new DefaultTableModel(data,columns));*/
+							//resets table - but there is still a bug where table will not reset
+							DefaultTableModel model = (DefaultTableModel) tableplanner.getModel();
+							model.setRowCount(0);
+							
+							tableplanner.setModel(new DefaultTableModel(data,columns));
+							//System.out.println(plan);
 			        
 					}
 			
 				}
 		            
 			}
+		}
 			
 }
 
