@@ -57,7 +57,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private int hour, minute, day, month, year;
 	
 	
-	private String timetemp[] = new String[100], timeminute[] = new String[100], timehour[] = new String[100], 
+	private String timetemp[] = new String[100], timeString[] = new String[100], timeminute[] = new String[100], timehour[] = new String[100], 
 			dateday[] = new String[100], datemonth[] = new String[100], dateyear[] = new String[100];
 	private int timeminuteint[] = new int[100], timehourint[] = new int[100], datedayint[] = new int[100], 
 			datemonthint[] = new int[100], dateyearint[] = new int[100];
@@ -335,7 +335,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 				
 				//send information to InitEntityValue class to create an InitEntityValue with constructor
 				plan = new InitEntityValue((String) strPlan, strTime, date, (int) day, month, year);
-				System.out.println(Planner.toString());
+				//System.out.println(Planner.toString());
 				
 				Planner.add(plan);
 				
@@ -376,15 +376,15 @@ public class Project2GUI extends JFrame implements ActionListener{
 				for(int x = 0; x < infostore.size(); x++)
 				{
 					timetemp[x] = infostore.get(x);
-					//timeminute = timehour;
 					
+					//split an array index into their own useful forms - does this for ALL indexes
 					String[] parts = timetemp[x].split("-");
 					timehour[x] = parts[0];
 					timeminute[x] = parts[1];
 					dateday[x] = parts[2];
 					datemonth[x] = parts[3];
 					dateyear[x] = parts[4];
-					
+					//turn them into integers in order to bubble sort
 					timehourint[x] = Integer.parseInt(timehour[x]);
 					timeminuteint[x] = Integer.parseInt(timeminute[x]);
 					datedayint[x] = Integer.parseInt(dateday[x]);
@@ -397,76 +397,194 @@ public class Project2GUI extends JFrame implements ActionListener{
 					//		+ ":" + datemonthint[x] + ":" + dateyearint[x]);
 				}	
 				
-				 	//TODO:SORTER
+				//Bubble sorts
 				 
-					String temp = "";
-					int temp1, temp2, temp3 = 0;
-		            if(infostore.size() > 1) {
-			            /*this controls how many times we need to
-			            repeat the sort (for every item in the array)
-			            */
-			            for(int i = 0; i < infostore.size(); i++) 
-			            {
-			            /* This sorts the array once starting at the first index
-			            */
-			               for(int j = 1; j < (infostore.size() - i); j++)
-			               {
-			            	   //System.out.println(j);
-			                   //i represents the current value in the current index, starting from 0
-			            	   //sorts by year
-			            	   if(dateyearint[j - 1] > dateyearint[j]){
-			            		   temp = infostore.get(j);
-			            		   infostore.set(j, infostore.get(j - 1));
-			            		   infostore.set(j - 1, temp);
-			                     
-			            		   temp1 = dateyearint[j-1];
-			            		   dateyearint[j-1] = dateyearint[j];
-			            		   dateyearint[j] = temp1;
-			                   }
-			               }
-			               for(int j = 1; j < (infostore.size() - i); j++)
-			               {
-			            	  //System.out.println(j);
-			                  //i represents the current value in the current index, starting from 0
-			            	   if(datemonthint[j - 1] > datemonthint[j]){
-			            		   temp = infostore.get(j);
-			            		   infostore.set(j, infostore.get(j - 1));
-			            		   infostore.set(j - 1, temp);
+				String temp = "";
+				int temp1, temp2, temp3, temp4, temp5 = 0;
+		        if(infostore.size() > 1) {
+			        /*this controls how many times we need to
+			        repeat the sort (for every item in the array)
+			        NOTE: extremely sensitive to order in which you for loop
+			        */
+		            for(int i = 0; i < infostore.size(); i++)
+			        {
+		            	for(int j = 1; j < (infostore.size() - i); j++)
+					       	{
+				            	if(timeminuteint[j - 1] > timeminuteint[j])
+				            	{
+				            	temp = infostore.get(j);
+						        infostore.set(j, infostore.get(j - 1));
+						        infostore.set(j - 1, temp);
+						                     
+						        temp1 = dateyearint[j-1];
+						        dateyearint[j-1] = dateyearint[j];
+						        dateyearint[j] = temp1;
+						        temp2 = datemonthint[j-1];
+						        datemonthint[j-1] = datemonthint[j];
+						        datemonthint[j] = temp2;
+						        temp3 = datedayint[j-1];
+						        datedayint[j-1] = datedayint[j];
+						        datedayint[j] = temp3;
+						        temp4 = timehourint[j-1];
+						        timehourint[j-1] = timehourint[j];
+						        timehourint[j] = temp4;
+						        temp5 = timeminuteint[j-1];
+						        timeminuteint[j-1] = timeminuteint[j];
+						        timeminuteint[j] = temp5;
+						        }
+					       	}
+		            	for(int j = 1; j < (infostore.size() - i); j++)
+					       	{
+				            	if(timehourint[j - 1] > timehourint[j])
+				            	{
+				            	temp = infostore.get(j);
+						        infostore.set(j, infostore.get(j - 1));
+						        infostore.set(j - 1, temp);
+						                     
+						        temp1 = dateyearint[j-1];
+						        dateyearint[j-1] = dateyearint[j];
+						        dateyearint[j] = temp1;
+						        temp2 = datemonthint[j-1];
+						        datemonthint[j-1] = datemonthint[j];
+						        datemonthint[j] = temp2;
+						        temp3 = datedayint[j-1];
+						        datedayint[j-1] = datedayint[j];
+						        datedayint[j] = temp3;
+						        temp4 = timehourint[j-1];
+						        timehourint[j-1] = timehourint[j];
+						        timehourint[j] = temp4;
+						        temp5 = timeminuteint[j-1];
+						        timeminuteint[j-1] = timeminuteint[j];
+						        timeminuteint[j] = temp5;
+						        }
+					       	}
+			            for(int j = 1; j < (infostore.size() - i); j++)
+					        {
+				            	if(datedayint[j - 1] > datedayint[j])
+				            	{
+				            	temp = infostore.get(j);
+				            	infostore.set(j, infostore.get(j - 1));
+						        infostore.set(j - 1, temp);
+						                     
+						        temp1 = dateyearint[j-1];
+						        dateyearint[j-1] = dateyearint[j];
+						        dateyearint[j] = temp1;
+						        temp2 = datemonthint[j-1];
+						        datemonthint[j-1] = datemonthint[j];
+						        datemonthint[j] = temp2;
+						        temp3 = datedayint[j-1];
+						        datedayint[j-1] = datedayint[j];
+						        datedayint[j] = temp3;
+						        temp4 = timehourint[j-1];
+						        timehourint[j-1] = timehourint[j];
+						        timehourint[j] = temp4;
+						        temp5 = timeminuteint[j-1];
+						        timeminuteint[j-1] = timeminuteint[j];
+						        timeminuteint[j] = temp5;
+						        }
+					        }
+			            for(int j = 1; j < (infostore.size() - i); j++)
+				           	{
+				            //System.out.println(j);
+				            //i represents the current value in the current index, starting from 0
+					            if(datemonthint[j - 1] > datemonthint[j])
+					            {
+					            temp = infostore.get(j);
+					            infostore.set(j, infostore.get(j - 1));
+					            infostore.set(j - 1, temp);
+						                     
+					            temp1 = dateyearint[j-1];
+					            dateyearint[j-1] = dateyearint[j];
+					            dateyearint[j] = temp1;
+					            temp2 = datemonthint[j-1];
+					            datemonthint[j-1] = datemonthint[j];
+					            datemonthint[j] = temp2;  
+					            temp3 = datedayint[j-1];
+							    datedayint[j-1] = datedayint[j];
+							    datedayint[j] = temp3;
+							    temp4 = timehourint[j-1];
+							    timehourint[j-1] = timehourint[j];
+							    timehourint[j] = temp4;
+							    temp5 = timeminuteint[j-1];
+							    timeminuteint[j-1] = timeminuteint[j];
+							    timeminuteint[j] = temp5;
+						        }
+				           	}
+			            for(int j = 1; j < (infostore.size() - i); j++)
+			                {
+			            	//System.out.println(j);
+			                //i represents the current value in the current index, starting from 0
+			            	//sorts by year
+				            	if(dateyearint[j - 1] > dateyearint[j])
+				            	{
+				            	temp = infostore.get(j);
+				            	infostore.set(j, infostore.get(j - 1));
+				            	infostore.set(j - 1, temp);
 				                     
-			            		   temp1 = dateyearint[j-1];
-			            		   dateyearint[j-1] = dateyearint[j];
-			            		   dateyearint[j] = temp1;
-			            		   temp2 = datemonthint[j-1];
-			            		   datemonthint[j-1] = datemonthint[j];
-			            		   datemonthint[j] = temp2;  
-				               }
-			               }
-			               for(int j = 1; j < (infostore.size() - i); j++)
-				           {
-			            	   	if(datedayint[j - 1] > datedayint[j]){
-			            		   temp = infostore.get(j);
-					               infostore.set(j, infostore.get(j - 1));
-					               infostore.set(j - 1, temp);
-					                     
-					               temp1 = dateyearint[j-1];
-					               dateyearint[j-1] = dateyearint[j];
-					               dateyearint[j] = temp1;
-					               temp2 = datemonthint[j-1];
-					               datemonthint[j-1] = datemonthint[j];
-					               datemonthint[j] = temp2;
-					               temp3 = datedayint[j-1];
-					               datedayint[j-1] = datedayint[j];
-					               datedayint[j] = temp3;
-					            }
-				           	} 
-			            }
+				            	temp1 = dateyearint[j-1];
+				            	dateyearint[j-1] = dateyearint[j];
+				            	dateyearint[j] = temp1;
+				            	temp2 = datemonthint[j-1];
+				            	datemonthint[j-1] = datemonthint[j];
+				            	datemonthint[j] = temp2;
+				            	temp3 = datedayint[j-1];
+						        datedayint[j-1] = datedayint[j];
+						        datedayint[j] = temp3;
+						        temp4 = timehourint[j-1];
+						        timehourint[j-1] = timehourint[j];
+						        timehourint[j] = temp4;
+						        temp5 = timeminuteint[j-1];
+						        timeminuteint[j-1] = timeminuteint[j];
+						        timeminuteint[j] = temp5;
+				                }
+			                }
+			           	}
+			            
 			            String formattedArray = "test\n";
 					    for(String tempint : infostore) //forEach loop
 					    {
 					    	formattedArray += tempint + "\n";
 					    }
-					    System.out.println(formattedArray);
+					    //System.out.println(formattedArray);
+					    System.out.println(infostore);
 		            	}
+		        		/*
+				        for(int x = 0; x < infostore.size(); x++)
+						{
+							timetemp[x] = infostore.get(x);
+							
+							//split an array index into their own useful forms - does this for ALL indexes
+							String[] parts = timetemp[x].split("-");
+							timehour[x] = parts[0];
+							timeminute[x] = parts[1];
+							dateday[x] = parts[2];
+							datemonth[x] = parts[3];
+							dateyear[x] = parts[4];
+							timeString[x] = parts[5];
+							//turn them into integers
+							timehourint[x] = Integer.parseInt(timehour[x]);
+							timeminuteint[x] = Integer.parseInt(timeminute[x]);
+							datedayint[x] = Integer.parseInt(dateday[x]);
+							datemonthint[x] = Integer.parseInt(datemonth[x]);
+							dateyearint[x] = Integer.parseInt(dateyear[x]);
+							
+							String strPlan = inputPlan.getText();
+							String s = String.format("%02d", minute);
+							String strTime = hour + ":" + s;
+							String date = day + "/" + month + "/" + year;
+							
+							plan = new InitEntityValue((String) strPlan, strTime, date, (int) day, month, year);
+							
+							Planner.add(plan);
+							
+							data = new Object[Planner.size()][columns.length];
+							for(int i = 0; i < Planner.size(); i++)
+							{
+								data[i][0] = Planner.get(i).getPlans();
+								data[i][1] = Planner.get(i).getTime();
+								data[i][2] = Planner.get(i).getDate();
+							}
+							tableplanner.setModel(new DefaultTableModel(data,columns));*/
 			        
 					}
 			
