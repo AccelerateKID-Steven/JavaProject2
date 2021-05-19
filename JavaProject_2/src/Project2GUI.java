@@ -12,18 +12,24 @@ import javax.swing.table.DefaultTableModel;
 import classes.InitEntityValue;
 
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import javax.swing.JSplitPane;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
@@ -56,7 +62,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	String strTime = new String("");
 	String date = new String("");
 	private int hour, minute, day, month, year;
-	
+	private BufferedImage bImg;
 	
 	private String timetemp[] = new String[100], planString[] = new String[100], timeminute[] = new String[100], timehour[] = new String[100], 
 			dateday[] = new String[100], datemonth[] = new String[100], dateyear[] = new String[100];
@@ -126,7 +132,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 		tableplanner.setEnabled(false);
 		
 		btnAdd = new JButton("Add");
-		btnAdd.setBackground(SystemColor.control);
+		btnAdd.setBackground(Color.LIGHT_GRAY);
 		btnAdd.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
 		btnAdd.setBounds(76, 460, 152, 55);
 		frame.getContentPane().add(btnAdd);
@@ -221,11 +227,29 @@ public class Project2GUI extends JFrame implements ActionListener{
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(10, 153, 121, 2);
 		frame.getContentPane().add(separator_3);
+		//will try to create the image variable
+		//needs try/catch just in case it can't find/read the image file
+		//NOTE: in order for image to work, run in administrator
+		//If you decrease the JLabel, you must decrease the width and height of the actual image as well
+		try {
+			bImg = ImageIO.read(new File("img/RedX.png"));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(frame, "Image Unable to load, Run in administrator");
+		}
+		
+		JButton btnImagesbutton = new JButton(" ");
+		btnImagesbutton.setBounds(151, 270, 124, 124);
+		btnImagesbutton.setIcon(new ImageIcon(bImg.getScaledInstance(124, 124, Image.SCALE_SMOOTH)));
+		frame.getContentPane().add(btnImagesbutton);
 		
 		//How many columns are in the table
 		columns = new String[] { 
 				"Plan", "Due Time", "Due Date",
 				//"Day", "Month", "Year"
+
+
 			};
 		
 		data = new Object[][] {
