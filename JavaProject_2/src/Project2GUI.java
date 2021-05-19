@@ -45,6 +45,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private JEditorPane inputPlan;
 	private JTable tableplanner;
 	private JButton btnAdd;
+	private JButton btnImagesbutton;
 	//our inputs of due date and time
 	private JTextField txtHour;
 	private JTextField txtMinute;
@@ -57,7 +58,6 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private String[] columns;
 	private Object[][] data;
 	private ArrayList<String> infostore = new ArrayList<String>();
-	private int addpressnumber = 0;
 	String strPlan = new String("");
 	String strTime = new String("");
 	String date = new String("");
@@ -239,10 +239,11 @@ public class Project2GUI extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(frame, "Image Unable to load, Run in administrator");
 		}
 		
-		JButton btnImagesbutton = new JButton(" ");
+		btnImagesbutton = new JButton(" ");
 		btnImagesbutton.setBounds(151, 270, 124, 124);
 		btnImagesbutton.setIcon(new ImageIcon(bImg.getScaledInstance(124, 124, Image.SCALE_SMOOTH)));
 		frame.getContentPane().add(btnImagesbutton);
+		btnImagesbutton.addActionListener(this);
 		
 		//How many columns are in the table
 		columns = new String[] { 
@@ -362,16 +363,22 @@ public class Project2GUI extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		//press the button
 		Object source = e.getSource();
+		if(source == btnImagesbutton)
+		{
+			inputPlan.setText("");
+			txtHour.setText("");
+			txtMinute.setText("");
+			txtdd.setText("");
+			txtmm.setText("");
+			txtyear.setText("");
+		}
 		if(source == btnAdd)
 		{
-			addpressnumber = addpressnumber + 1;
 			//if controls are valid, run the code
 			if(Validate())
 			{
 				
-				
-				//TODO:sort multiple "Add" submissions
-				//yeah i have no idea how to do this, help - we need to store this info somewhere
+				//we need to store this info somewhere
 				//oldest to newest
 				//put all into one string
 				String str1 = Integer.toString(hour);
@@ -587,6 +594,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 							
 							plan = new InitEntityValue((String) strPlan, strTime, date); //sends into class
 							
+							
 							Planner.add(plan);
 							
 							data = new Object[Planner.size()][columns.length];
@@ -602,9 +610,19 @@ public class Project2GUI extends JFrame implements ActionListener{
 							
 							tableplanner.setModel(new DefaultTableModel(data,columns));
 							//System.out.println(plan);
-			        
+							hour = 0; minute = 0; day = 0; month = 0; year = 0;
+							str1 = ""; str2 = ""; str3 = ""; str4 = ""; str5 = "";
+							temp = "";
+							temp1 = 0; temp2 = 0; temp3 = 0; temp4 = 0; temp5 = 0;
+							timetemp[x] = ""; timehour[x] = ""; timeminute[x] = "";
+							dateday[x] = ""; datemonth[x] = ""; dateyear[x] = "";
+							timehourint[x] = 0; timeminuteint[x] = 0;
+							datedayint[x] = 0; datemonthint[x] = 0; dateyearint[x] = 0;
+							strPlan = ""; s = ""; strTime = ""; date = "";
+							
 					}
-			
+				    //Planner.removeAll(Planner);
+					Planner.clear();
 				}
 		            
 			}
