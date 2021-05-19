@@ -30,6 +30,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextPane;
 import javax.swing.JEditorPane;
 import javax.swing.JTable;
+import java.awt.SystemColor;
 
 public class Project2GUI extends JFrame implements ActionListener{
 
@@ -89,16 +90,17 @@ public class Project2GUI extends JFrame implements ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.DARK_GRAY);
+		frame.getContentPane().setBackground(new Color(192, 192, 192));
 		frame.setBounds(100, 100, 620, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Scheduler");
-		lblTitle.setForeground(Color.WHITE);
+		lblTitle.setBackground(Color.WHITE);
+		lblTitle.setForeground(new Color(70, 130, 180));
 		lblTitle.setBounds(0, 0, 606, 39);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitle.setFont(new Font("Microsoft JhengHei UI Light", Font.BOLD, 20));
+		lblTitle.setFont(new Font("Microsoft JhengHei UI Light", Font.BOLD, 24));
 		frame.getContentPane().add(lblTitle);
 		
 		JSeparator separator_1 = new JSeparator();
@@ -108,33 +110,38 @@ public class Project2GUI extends JFrame implements ActionListener{
 		
 		//User inputs plans
 		inputPlan = new JEditorPane();
-		inputPlan.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		inputPlan.setBounds(10, 49, 586, 75);
+		inputPlan.setBackground(SystemColor.control);
+		inputPlan.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		inputPlan.setBounds(10, 84, 268, 39);
 		frame.getContentPane().add(inputPlan);
 		
 		tableplanner = new JTable();
+		tableplanner.setShowVerticalLines(false);
+		tableplanner.setShowGrid(false);
+		tableplanner.setBackground(SystemColor.control);
 		tableplanner.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		tableplanner.setBounds(10, 390, 586, 163);
+		tableplanner.setBounds(298, 59, 298, 494);
 		frame.getContentPane().add(tableplanner);
 		//line below sets editing to false
 		tableplanner.setEnabled(false);
 		
 		btnAdd = new JButton("Add");
-		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAdd.setBounds(260, 357, 85, 21);
+		btnAdd.setBackground(SystemColor.control);
+		btnAdd.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
+		btnAdd.setBounds(76, 460, 152, 55);
 		frame.getContentPane().add(btnAdd);
 		btnAdd.addActionListener(this);
 		
 		JLabel lblTime = new JLabel("Time (12 Hour)");
-		lblTime.setForeground(Color.WHITE);
-		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTime.setForeground(new Color(70, 130, 180));
+		lblTime.setFont(new Font("Leelawadee UI", Font.PLAIN, 18));
 		lblTime.setBounds(10, 134, 131, 21);
 		frame.getContentPane().add(lblTime);
 		
 		txtHour = new JTextField();
 		txtHour.setHorizontalAlignment(SwingConstants.CENTER);
 		txtHour.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtHour.setBounds(20, 165, 35, 23);
+		txtHour.setBounds(10, 164, 45, 23);
 		frame.getContentPane().add(txtHour);
 		txtHour.setColumns(10);
 		
@@ -148,62 +155,72 @@ public class Project2GUI extends JFrame implements ActionListener{
 		txtMinute.setHorizontalAlignment(SwingConstants.CENTER);
 		txtMinute.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtMinute.setColumns(10);
-		txtMinute.setBounds(81, 165, 35, 23);
+		txtMinute.setBounds(84, 164, 45, 23);
 		frame.getContentPane().add(txtMinute);
 		
 		JLabel lblDate = new JLabel("Date");
-		lblDate.setForeground(Color.WHITE);
-		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDate.setForeground(new Color(70, 130, 180));
+		lblDate.setFont(new Font("Leelawadee UI", Font.PLAIN, 18));
 		lblDate.setBounds(151, 134, 45, 20);
 		frame.getContentPane().add(lblDate);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(151, 153, 141, 2);
+		separator.setBounds(151, 153, 119, 2);
 		frame.getContentPane().add(separator);
 		
-		JLabel lbldd = new JLabel("Day #:");
-		lbldd.setForeground(Color.WHITE);
-		lbldd.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lbldd.setBounds(151, 165, 57, 22);
+		JLabel lbldd = new JLabel("Day    #:");
+		lbldd.setForeground(new Color(70, 130, 180));
+		lbldd.setFont(new Font("Leelawadee UI", Font.PLAIN, 18));
+		lbldd.setBounds(151, 165, 77, 22);
 		frame.getContentPane().add(lbldd);
 		
 		txtdd = new JTextField();
 		txtdd.setHorizontalAlignment(SwingConstants.CENTER);
 		txtdd.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtdd.setColumns(10);
-		txtdd.setBounds(207, 165, 35, 23);
+		txtdd.setBounds(238, 165, 35, 23);
 		frame.getContentPane().add(txtdd);
 		
 		JLabel lblmm = new JLabel("Month #:");
-		lblmm.setForeground(Color.WHITE);
-		lblmm.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblmm.setBounds(252, 165, 77, 22);
+		lblmm.setForeground(new Color(70, 130, 180));
+		lblmm.setFont(new Font("Leelawadee UI", Font.PLAIN, 18));
+		lblmm.setBounds(151, 198, 77, 22);
 		frame.getContentPane().add(lblmm);
 		
 		txtmm = new JTextField();
 		txtmm.setHorizontalAlignment(SwingConstants.CENTER);
 		txtmm.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtmm.setColumns(10);
-		txtmm.setBounds(328, 165, 35, 23);
+		txtmm.setBounds(238, 199, 35, 23);
 		frame.getContentPane().add(txtmm);
 		
-		JLabel lblyyyy = new JLabel("Year #:");
-		lblyyyy.setForeground(Color.WHITE);
-		lblyyyy.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblyyyy.setBounds(373, 166, 62, 22);
+		JLabel lblyyyy = new JLabel("Year   #:");
+		lblyyyy.setForeground(new Color(70, 130, 180));
+		lblyyyy.setFont(new Font("Leelawadee UI", Font.PLAIN, 18));
+		lblyyyy.setBounds(151, 231, 77, 22);
 		frame.getContentPane().add(lblyyyy);
 		
 		txtyear = new JTextField();
 		txtyear.setHorizontalAlignment(SwingConstants.CENTER);
 		txtyear.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtyear.setColumns(10);
-		txtyear.setBounds(434, 165, 35, 23);
+		txtyear.setBounds(238, 233, 35, 23);
 		frame.getContentPane().add(txtyear);
 		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
-		separator_2.setBounds(140, 134, 1, 75);
+		separator_2.setBounds(139, 134, 2, 119);
 		frame.getContentPane().add(separator_2);
+		
+		JLabel lblNewLabel = new JLabel("Event Name");
+		lblNewLabel.setForeground(new Color(70, 130, 180));
+		lblNewLabel.setFont(new Font("Leelawadee UI", Font.PLAIN, 18));
+		lblNewLabel.setBounds(97, 50, 99, 28);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JSeparator separator_3 = new JSeparator();
+		separator_3.setBounds(10, 153, 121, 2);
+		frame.getContentPane().add(separator_3);
 		
 		//How many columns are in the table
 		columns = new String[] { 
@@ -568,7 +585,6 @@ public class Project2GUI extends JFrame implements ActionListener{
 		            
 			}
 		}
-			
 }
 
 
