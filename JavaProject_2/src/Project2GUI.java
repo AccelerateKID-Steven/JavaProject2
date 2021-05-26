@@ -244,6 +244,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 		btnImagesbutton.setBounds(151, 270, 124, 124);
 		btnImagesbutton.setIcon(new ImageIcon(bImg.getScaledInstance(124, 124, Image.SCALE_SMOOTH)));
 		frame.getContentPane().add(btnImagesbutton);
+		btnImagesbutton.addActionListener(this);
 		
 		btnNewButton = new JButton("CLEAR SCHEDULE");
 		btnNewButton.setBackground(Color.LIGHT_GRAY);
