@@ -46,6 +46,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private JTable tableplanner;
 	private JButton btnAdd;
 	private JButton btnImagesbutton;
+	private JButton btnNewButton;
 	//our inputs of due date and time
 	private JTextField txtHour;
 	private JTextField txtMinute;
@@ -244,11 +245,12 @@ public class Project2GUI extends JFrame implements ActionListener{
 		btnImagesbutton.setIcon(new ImageIcon(bImg.getScaledInstance(124, 124, Image.SCALE_SMOOTH)));
 		frame.getContentPane().add(btnImagesbutton);
 		
-		JButton btnNewButton = new JButton("CLEAR SCHEDULE");
-		btnNewButton.setFont(new Font("Leelawadee UI", Font.PLAIN, 17));
-		btnNewButton.setBounds(105, 405, 173, 44);
+		btnNewButton = new JButton("CLEAR SCHEDULE");
+		btnNewButton.setBackground(Color.LIGHT_GRAY);
+		btnNewButton.setFont(new Font("Trebuchet MS", Font.PLAIN, 17));
+		btnNewButton.setBounds(68, 400, 168, 50);
 		frame.getContentPane().add(btnNewButton);
-		btnImagesbutton.addActionListener(this);
+		btnNewButton.addActionListener(this);
 		
 		//How many columns are in the table
 		columns = new String[] { 
@@ -609,9 +611,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 								data[i][1] = Planner.get(i).getTime();
 								data[i][2] = Planner.get(i).getDate();
 							}
-							//resets table - but there is still a bug where table will not reset
-							DefaultTableModel model = (DefaultTableModel) tableplanner.getModel();
-							model.setRowCount(0);
+							
 							
 							tableplanner.setModel(new DefaultTableModel(data,columns));
 							//System.out.println(plan);
@@ -626,10 +626,16 @@ public class Project2GUI extends JFrame implements ActionListener{
 							strPlan = ""; s = ""; strTime = ""; date = "";
 							
 					}
-				    //Planner.removeAll(Planner);
 					Planner.clear();
 				}
 		            
+			}
+			//resets the table when table clear button is clicked on
+			if(source == btnNewButton)
+			{
+				infostore.clear();
+				DefaultTableModel model = (DefaultTableModel) tableplanner.getModel();
+				model.setRowCount(0);
 			}
 		}
 }
