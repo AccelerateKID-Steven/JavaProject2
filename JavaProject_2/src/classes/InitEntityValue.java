@@ -10,6 +10,7 @@ public class InitEntityValue
 {
 	//field variables
 	private String Plans, Time, Date;
+	protected String EventLocation;
 	private int Hour, Minute, Day, Month, Year; //gonna combine all into Date, and use them to sort to-dos
 	
 	public InitEntityValue(){
@@ -31,6 +32,17 @@ public class InitEntityValue
 		//this.Month = Month;
 		//this.Year = Year;
 	}
+	class LocationAdder extends InitEntityValue
+	{
+		public LocationAdder()
+		{
+			EventLocation = "School";
+		}
+		public LocationAdder(String EventLocation)
+		{
+			this.EventLocation = EventLocation;
+		}
+	}
 	/*public String toString()
 	{
 	      String myString;
@@ -49,6 +61,8 @@ public class InitEntityValue
 	public String getDate(){return Date;}
 	public void setDate(String Date){this.Date = Date;}
 	
+	public String getEventLocation() {return EventLocation;}
+	public void setEventLocation(String EventLocation) {this.EventLocation = EventLocation;}
 	/*public int getDay(){return Day;}
 	public void setDay(int Day){this.Day = Day;}
 	
