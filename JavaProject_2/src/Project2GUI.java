@@ -47,6 +47,8 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private JButton btnAdd;
 	private JButton btnImagesbutton;
 	private JButton btnNewButton;
+	private JComboBox extrainfoComBox;
+	private JEditorPane childclassinput;
 	//our inputs of due date and time
 	private JTextField txtHour;
 	private JTextField txtMinute;
@@ -55,6 +57,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private JTextField txtyear;
 	
 	private InitEntityValue plan;
+	//private LocationAdder childata;
 	private ArrayList<InitEntityValue> Planner = new ArrayList<InitEntityValue>();
 	private String[] columns;
 	private Object[][] data;
@@ -65,8 +68,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 	private int hour, minute, day, month, year;
 	private BufferedImage bImg;
 	
-	private String timetemp[] = new String[100], planString[] = new String[100], timeminute[] = new String[100], timehour[] = new String[100], 
-			dateday[] = new String[100], datemonth[] = new String[100], dateyear[] = new String[100];
+	private String timetemp[] = new String[100], planString[] = new String[100], childcString[] = new String[100],
+			timeminute[] = new String[100], timehour[] = new String[100], dateday[] = new String[100], 
+			datemonth[] = new String[100], dateyear[] = new String[100];
 	private int timeminuteint[] = new int[100], timehourint[] = new int[100], datedayint[] = new int[100], 
 			datemonthint[] = new int[100], dateyearint[] = new int[100];
 	/**
@@ -135,7 +139,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 		btnAdd = new JButton("Add");
 		btnAdd.setBackground(Color.LIGHT_GRAY);
 		btnAdd.setFont(new Font("Trebuchet MS", Font.PLAIN, 30));
-		btnAdd.setBounds(76, 460, 152, 55);
+		btnAdd.setBounds(68, 460, 168, 55);
 		frame.getContentPane().add(btnAdd);
 		btnAdd.addActionListener(this);
 		
@@ -228,6 +232,23 @@ public class Project2GUI extends JFrame implements ActionListener{
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setBounds(10, 153, 121, 2);
 		frame.getContentPane().add(separator_3);
+		
+		extrainfoComBox = new JComboBox();
+		extrainfoComBox.setModel(new DefaultComboBoxModel(new String[] {"", "Location"}));
+		extrainfoComBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		extrainfoComBox.setBounds(10, 290, 119, 26);
+		frame.getContentPane().add(extrainfoComBox);
+		
+		JLabel lblExtraInfo = new JLabel("Extra Info:");
+		lblExtraInfo.setForeground(new Color(70, 130, 180));
+		lblExtraInfo.setFont(new Font("Leelawadee UI", Font.PLAIN, 18));
+		lblExtraInfo.setBounds(10, 258, 119, 22);
+		frame.getContentPane().add(lblExtraInfo);
+		
+		childclassinput = new JEditorPane();
+		childclassinput.setBackground(SystemColor.control);
+		childclassinput.setBounds(139, 266, 139, 50);
+		frame.getContentPane().add(childclassinput);
 		//will try to create the image variable
 		//needs try/catch just in case it can't find/read the image file
 		//NOTE: in order for image to work, run in administrator
@@ -242,8 +263,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 		
 		btnImagesbutton = new JButton(" ");
 		btnImagesbutton.setToolTipText("CLEAR INPUTS");
-		btnImagesbutton.setBounds(151, 270, 124, 124);
-		btnImagesbutton.setIcon(new ImageIcon(bImg.getScaledInstance(124, 124, Image.SCALE_SMOOTH)));
+		btnImagesbutton.setBackground(Color.LIGHT_GRAY);
+		btnImagesbutton.setBounds(68, 340, 168, 50);
+		btnImagesbutton.setIcon(new ImageIcon(bImg.getScaledInstance(100, 70, Image.SCALE_SMOOTH)));
 		frame.getContentPane().add(btnImagesbutton);
 		btnImagesbutton.addActionListener(this);
 		
@@ -254,13 +276,19 @@ public class Project2GUI extends JFrame implements ActionListener{
 		frame.getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(this);
 		
+		
+		
 		//How many columns are in the table
-		columns = new String[] { 
-				"Plan", "Due Time", "Due Date",
-				//"Day", "Month", "Year"
-
-
+		if (extrainfoComBox.getSelectedItem().equals("Location")) {
+			columns = new String[] { 
+			"Plan", "Due Time", "Due Date", "Location"
 			};
+		}
+		else {
+			columns = new String[] { 
+			"Plan", "Due Time", "Due Date"
+			};
+		}
 		
 		data = new Object[][] {
 			
@@ -375,6 +403,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 		if(source == btnImagesbutton)
 		{
 			inputPlan.setText("");
+			childclassinput.setText("");
 			txtHour.setText("");
 			txtMinute.setText("");
 			txtdd.setText("");
@@ -397,6 +426,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 				String str5 = Integer.toString(year);
 				String variablex = new String(str1 + "-" + str2 + "-" + str3 + "-" + 
 				str4 + "-" + str5 + "-" + inputPlan.getText());
+				if (extrainfoComBox.getSelectedItem().equals("Location")) {
+					variablex = variablex + "-" + childclassinput.getText();
+				}
 				
 				infostore.add(variablex);
 				System.out.println(infostore);
@@ -589,6 +621,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 							datemonth[x] = parts[3];
 							dateyear[x] = parts[4];
 							planString[x] = parts[5];
+							if (extrainfoComBox.getSelectedItem().equals("Location")) {
+								childcString[x] = parts[6];
+							}
 							//turn them into integers
 							timehourint[x] = Integer.parseInt(timehour[x]);
 							timeminuteint[x] = Integer.parseInt(timeminute[x]);
@@ -597,12 +632,15 @@ public class Project2GUI extends JFrame implements ActionListener{
 							dateyearint[x] = Integer.parseInt(dateyear[x]);
 							
 							String strPlan = planString[x].toString();
+							String strchildc = childcString[x].toString();
 							String s = String.format("%02d", timeminuteint[x]);
 							String strTime = timehourint[x] + ":" + s;
 							String date = datedayint[x] + "/" + datemonthint[x] + "/" + dateyearint[x];
 							
 							plan = new InitEntityValue((String) strPlan, strTime, date); //sends into class
-							
+							//if (extrainfoComBox.getSelectedItem().equals("Location")) {
+							//	LocationAdder childata = new LocationAdder(strchildc);
+							//}
 							
 							Planner.add(plan);
 							
