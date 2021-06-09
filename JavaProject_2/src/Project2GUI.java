@@ -295,7 +295,8 @@ public class Project2GUI extends JFrame implements ActionListener{
 		};
 	}
 	
-	private boolean Validate() {
+	private boolean Validate() 
+	{
 		boolean bool = true;
 		hour = 0;
 		minute = 0;
@@ -307,91 +308,72 @@ public class Project2GUI extends JFrame implements ActionListener{
 			bool = false; //no initiation
 			JOptionPane.showMessageDialog(null,"You must write something in the large box");
 		}
+		
 		if(txtHour.getText().equals(""))
 		{
 			bool = false;
 			JOptionPane.showMessageDialog(null,"Hour is a required variable");
 		}
 		else {
-			try { //same thing
-				hour = Integer.parseInt(txtHour.getText());
-				if(hour < 0 || hour > 12) {
-					
-				}
-			}
-			catch(Exception e) {
+			hour = Integer.parseInt(txtHour.getText());
+			if(hour < 0 || hour > 12) {
 				bool = false;
-				JOptionPane.showMessageDialog(null,"Hour is a required variable");
-				}
+				JOptionPane.showMessageDialog(null,"Hour must be within 0 - 12");
 			}
+		}
+		
 		if(txtMinute.getText().equals(""))
 		{
 			bool = false;
 			JOptionPane.showMessageDialog(null,"Minute is a required variable");
 		}
 		else {
-			try {
-				minute = Integer.parseInt(txtMinute.getText());
-				if(minute < 0 || minute > 60) {
-					
-				}
-			}
-			catch(Exception e) {
+			minute = Integer.parseInt(txtMinute.getText());
+			if(minute < 0 || minute > 60) {
 				bool = false;
-				JOptionPane.showMessageDialog(null,"Minute is a required variable");
-				}
+				JOptionPane.showMessageDialog(null,"Minute must be within 0 - 60");
 			}
+		}
+		
 		if(txtdd.getText().equals(""))
 		{
 			bool = false;
 			JOptionPane.showMessageDialog(null,"Day is a required variable");
 		}
 		else {
-			try {
-				day = Integer.parseInt(txtdd.getText());
-				if(day < 0 || day > 31) {
-					
-				}
-			}
-			catch(Exception e) {
+			day = Integer.parseInt(txtdd.getText());
+			if(day < 0 || day > 31) {
 				bool = false;
-				JOptionPane.showMessageDialog(null,"Day is a required variable");
-				}
+				JOptionPane.showMessageDialog(null,"Day must be within 0 - 31/30");
 			}
+		}
+		
 		if(txtmm.getText().equals(""))
 		{
 			bool = false;
 			JOptionPane.showMessageDialog(null,"Month is a required variable");
 		}
 		else {
-			try {
-				month = Integer.parseInt(txtmm.getText());
-				if(month < 0 || month > 12) {
-					
-				}
-			}
-			catch(Exception e) {
+			month = Integer.parseInt(txtmm.getText());
+			if(month < 0 || month > 12) {
 				bool = false;
 				JOptionPane.showMessageDialog(null,"Month must be an integer between 1-12");
-				}
 			}
+		}
+		
 		if(txtyear.getText().equals(""))
 		{
 			bool = false;
 			JOptionPane.showMessageDialog(null,"Year is a required variable");
 		}
 		else {
-			try {
-				year = Integer.parseInt(txtyear.getText());
-				if(year < 0) {
-					
-				}
-			}
-			catch(Exception e) {
+			year = Integer.parseInt(txtyear.getText());
+			if(year < 0) {
 				bool = false;
 				JOptionPane.showMessageDialog(null,"Year must be a integer greater than 0");
-				}
 			}
+		}
+		
 		return bool;
 	}
 	
@@ -623,6 +605,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 							planString[x] = parts[5];
 							if (extrainfoComBox.getSelectedItem().equals("Location")) {
 								childcString[x] = parts[6];
+								String strchildc = childcString[x].toString();
 							}
 							//turn them into integers
 							timehourint[x] = Integer.parseInt(timehour[x]);
@@ -632,7 +615,6 @@ public class Project2GUI extends JFrame implements ActionListener{
 							dateyearint[x] = Integer.parseInt(dateyear[x]);
 							
 							String strPlan = planString[x].toString();
-							String strchildc = childcString[x].toString();
 							String s = String.format("%02d", timeminuteint[x]);
 							String strTime = timehourint[x] + ":" + s;
 							String date = datedayint[x] + "/" + datemonthint[x] + "/" + dateyearint[x];
