@@ -17,20 +17,12 @@ public class InitEntityValue
 		Plans = "Eat Dinner";
 		Time = "5:30";
 		Date = "5/5/2005"; //Day + "/" + Month + "/" + Year
-		/*Day = 5;
-		Month = 5;
-		Year = 2005;*/
 	}
-	public InitEntityValue(String Plans, String Time, String Date
-								//,int Day, int Month, int Year
-								)
+	public InitEntityValue(String Plans, String Time, String Date)
 	{
 		this.Plans = Plans;
 		this.Time = Time;
 		this.Date =  Date;
-		//this.Day = Day;
-		//this.Month = Month;
-		//this.Year = Year;
 	}
 	class LocationAdder extends InitEntityValue
 	{
@@ -43,15 +35,7 @@ public class InitEntityValue
 			this.EventLocation = EventLocation;
 		}
 	}
-	/*public String toString()
-	{
-	      String myString;
-	      myString =  Time + " - " + Plans +
-	    		  	"\n" + Day + "/" + Month + "/" + Year;
-	      
-	      return myString;
-	      
-	}*/
+	
 	public String getPlans(){return Plans;}
 	public void setPlans(String Plans){this.Plans = Plans;}
 	
@@ -63,12 +47,4 @@ public class InitEntityValue
 	
 	public String getEventLocation() {return EventLocation;}
 	public void setEventLocation(String EventLocation) {this.EventLocation = EventLocation;}
-	/*public int getDay(){return Day;}
-	public void setDay(int Day){this.Day = Day;}
-	
-	public int getMonth(){return Month;}
-	public void setMonth(int Month){this.Month = Month;}
-	
-	public int getYear(){return Year;}
-	public void setYear(int Year){this.Year = Year;}*/
 }

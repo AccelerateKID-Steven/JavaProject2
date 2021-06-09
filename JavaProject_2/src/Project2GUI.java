@@ -58,6 +58,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	
 	private InitEntityValue plan;
 	//private LocationAdder childata;
+	//private LocationAdder childata;
 	private ArrayList<InitEntityValue> Planner = new ArrayList<InitEntityValue>();
 	private String[] columns;
 	private Object[][] data;
@@ -438,11 +439,6 @@ public class Project2GUI extends JFrame implements ActionListener{
 						datedayint[x] = Integer.parseInt(dateday[x]);
 						datemonthint[x] = Integer.parseInt(datemonth[x]);
 						dateyearint[x] = Integer.parseInt(dateyear[x]);
-						
-						//timehour = timehour.substring(0,timehour.indexOf("-"));
-						//timeminute = timeminute.substring(timeminute.indexOf("-") + 1, timeminute.length());
-						//System.out.println(timehourint[x] + ":" + timeminuteint[x] + ":" + datedayint[x]
-						//		+ ":" + datemonthint[x] + ":" + dateyearint[x]);
 					}	
 			        /*this controls how many times we need to
 			        repeat the sort (for every item in the array)
@@ -605,7 +601,6 @@ public class Project2GUI extends JFrame implements ActionListener{
 							planString[x] = parts[5];
 							if (extrainfoComBox.getSelectedItem().equals("Location")) {
 								childcString[x] = parts[6];
-								String strchildc = childcString[x].toString();
 							}
 							//turn them into integers
 							timehourint[x] = Integer.parseInt(timehour[x]);
@@ -620,9 +615,10 @@ public class Project2GUI extends JFrame implements ActionListener{
 							String date = datedayint[x] + "/" + datemonthint[x] + "/" + dateyearint[x];
 							
 							plan = new InitEntityValue((String) strPlan, strTime, date); //sends into class
-							//if (extrainfoComBox.getSelectedItem().equals("Location")) {
-							//	LocationAdder childata = new LocationAdder(strchildc);
-							//}
+							
+							if (extrainfoComBox.getSelectedItem().equals("Location")) {
+								String strchildc = childcString[x].toString();
+							}
 							
 							Planner.add(plan);
 							
@@ -632,6 +628,9 @@ public class Project2GUI extends JFrame implements ActionListener{
 								data[i][0] = Planner.get(i).getPlans();
 								data[i][1] = Planner.get(i).getTime();
 								data[i][2] = Planner.get(i).getDate();
+								if (extrainfoComBox.getSelectedItem().equals("Location")) {
+									data[i][3] = Planner.get(i).getEventLocation();
+								}
 							}
 							
 							
