@@ -24,7 +24,7 @@ public class InitEntityValue
 		this.Time = Time;
 		this.Date =  Date;
 	}
-	class LocationAdder extends InitEntityValue
+	public class LocationAdder extends InitEntityValue
 	{
 		public LocationAdder()
 		{
@@ -35,6 +35,8 @@ public class InitEntityValue
 			this.EventLocation = EventLocation;
 		}
 	}
+	
+	
 	
 	public String getPlans(){return Plans;}
 	public void setPlans(String Plans){this.Plans = Plans;}

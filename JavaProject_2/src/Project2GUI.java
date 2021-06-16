@@ -10,6 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import classes.InitEntityValue;
+import classes.InitEntityValue.LocationAdder;
 
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -74,6 +75,8 @@ public class Project2GUI extends JFrame implements ActionListener{
 			datemonth[] = new String[100], dateyear[] = new String[100];
 	private int timeminuteint[] = new int[100], timehourint[] = new int[100], datedayint[] = new int[100], 
 			datemonthint[] = new int[100], dateyearint[] = new int[100];
+	private InitEntityValue.LocationAdder variableN;
+	private String strchildc;
 	/**
 	 * Launch the application.
 	 */
@@ -614,13 +617,22 @@ public class Project2GUI extends JFrame implements ActionListener{
 							String strTime = timehourint[x] + ":" + s;
 							String date = datedayint[x] + "/" + datemonthint[x] + "/" + dateyearint[x];
 							
-							plan = new InitEntityValue((String) strPlan, strTime, date); //sends into class
-							
 							if (extrainfoComBox.getSelectedItem().equals("Location")) {
-								String strchildc = childcString[x].toString();
+								strchildc = childcString[x].toString();
 							}
 							
-							Planner.add(plan);
+							plan = new InitEntityValue((String) strPlan, strTime, date); //sends into class
+							
+							variableN = new InitEntityValue().new LocationAdder();
+							
+							if ((variableN instanceof LocationAdder)) {
+								variableN = new InitEntityValue().new LocationAdder(strchildc); //sends into class
+								//Planner.add(plan, variableN);
+								//TODO: Fix whatever... this is
+							}
+							else {
+								Planner.add(plan);
+							}
 							
 							data = new Object[Planner.size()][columns.length];
 							for(int i = 0; i < Planner.size(); i++)
