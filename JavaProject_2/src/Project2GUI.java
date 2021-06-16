@@ -627,12 +627,13 @@ public class Project2GUI extends JFrame implements ActionListener{
 							
 							if ((variableN instanceof LocationAdder)) {
 								variableN = new InitEntityValue().new LocationAdder(strchildc); //sends into class
-								//Planner.add(plan, variableN);
 								//TODO: Fix whatever... this is
+								Planner.add(plan);
 							}
 							else {
 								Planner.add(plan);
 							}
+							Planner.add(plan);
 							
 							data = new Object[Planner.size()][columns.length];
 							for(int i = 0; i < Planner.size(); i++)
@@ -640,8 +641,11 @@ public class Project2GUI extends JFrame implements ActionListener{
 								data[i][0] = Planner.get(i).getPlans();
 								data[i][1] = Planner.get(i).getTime();
 								data[i][2] = Planner.get(i).getDate();
-								if (extrainfoComBox.getSelectedItem().equals("Location")) {
-									data[i][3] = Planner.get(i).getEventLocation();
+								if (variableN instanceof LocationAdder) { //instead of if "location", we use instance of
+									data[i][3] = variableN.getEventLocation();
+								}
+								else {
+									data[i][3] = "";
 								}
 							}
 							

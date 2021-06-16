@@ -26,6 +26,7 @@ public class InitEntityValue
 	}
 	public class LocationAdder extends InitEntityValue
 	{
+		//Constructors
 		public LocationAdder()
 		{
 			EventLocation = "School";
