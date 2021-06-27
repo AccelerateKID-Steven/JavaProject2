@@ -68,6 +68,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 	String strTime = new String("");
 	String date = new String("");
 	private int hour, minute, day, month, year;
+	private int tempor;
 	private BufferedImage bImg;
 	
 	private String timetemp[] = new String[100], planString[] = new String[100], childcString[] = new String[100],
@@ -413,7 +414,7 @@ public class Project2GUI extends JFrame implements ActionListener{
 				String variablex = new String(str1 + "-" + str2 + "-" + str3 + "-" + 
 				str4 + "-" + str5 + "-" + inputPlan.getText());
 				if (extrainfoComBox.getSelectedItem().equals("Location")) {
-					variablex = variablex + "-" + childclassinput.getText();
+					variablex = variablex + "+" + childclassinput.getText();
 				}
 				
 				infostore.add(variablex);
@@ -603,7 +604,11 @@ public class Project2GUI extends JFrame implements ActionListener{
 							dateyear[x] = parts[4];
 							planString[x] = parts[5];
 							if (extrainfoComBox.getSelectedItem().equals("Location")) {
-								childcString[x] = parts[6];
+								String[] parts1 = planString[x].split("\\+");
+								planString[x] = parts1[0];
+								childcString[x] = parts1[1];
+								System.out.println(planString[x]);
+								strchildc = childcString[x].toString();
 							}
 							//turn them into integers
 							timehourint[x] = Integer.parseInt(timehour[x]);
@@ -617,38 +622,33 @@ public class Project2GUI extends JFrame implements ActionListener{
 							String strTime = timehourint[x] + ":" + s;
 							String date = datedayint[x] + "/" + datemonthint[x] + "/" + dateyearint[x];
 							
-							if (extrainfoComBox.getSelectedItem().equals("Location")) {
-								strchildc = childcString[x].toString();
-							}
 							
 							plan = new InitEntityValue((String) strPlan, strTime, date); //sends into class
-							
+							if((variableN instanceof LocationAdder)) {
 							variableN = new InitEntityValue().new LocationAdder();
-							
-							if ((variableN instanceof LocationAdder)) {
-								variableN = new InitEntityValue().new LocationAdder(strchildc); //sends into class
-								//TODO: Fix whatever... this is
-								Planner.add(plan);
-							}
-							else {
-								Planner.add(plan);
 							}
 							Planner.add(plan);
 							
-							data = new Object[Planner.size()][columns.length];
-							for(int i = 0; i < Planner.size(); i++)
-							{
-								data[i][0] = Planner.get(i).getPlans();
-								data[i][1] = Planner.get(i).getTime();
-								data[i][2] = Planner.get(i).getDate();
-								if (variableN instanceof LocationAdder) { //instead of if "location", we use instance of
+							if (extrainfoComBox.getSelectedItem().equals("Location")) {
+								data = new Object[Planner.size() + 1][columns.length];
+								for(int i = 0; i < Planner.size(); i++)
+								{
+									data[i][0] = Planner.get(i).getPlans();
+									data[i][1] = Planner.get(i).getTime();
+									data[i][2] = Planner.get(i).getDate();
 									data[i][3] = variableN.getEventLocation();
 								}
-								else {
-									data[i][3] = "";
+							}
+							else {
+								data = new Object[Planner.size()][columns.length];
+								for(int i = 0; i < Planner.size(); i++)
+								{
+									data[i][0] = Planner.get(i).getPlans();
+									data[i][1] = Planner.get(i).getTime();
+									data[i][2] = Planner.get(i).getDate();
+									
 								}
 							}
-							
 							
 							tableplanner.setModel(new DefaultTableModel(data,columns));
 							//System.out.println(plan);
